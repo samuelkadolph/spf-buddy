@@ -1,0 +1,41 @@
+{{template "header.html" .}}
+
+{{if .spf}}
+{{if .includesSpecifiedDomain}}
+<div class="alert alert-success">
+  {{.domain}} includes {{.specifiedDomain}}
+</div>
+{{else}}
+<div class="alert alert-info spacer">
+  {{.domain}} does not include {{.specifiedDomain}}
+</div>
+<div class="row">
+  <div class="span12">
+    <p>You should use this <strong>SPF</strong> record to include {{.specifiedDomain}}:</p>
+    <code style="overflow-x:scroll; display: block; padding: 20px">{{.suggested.Value}}</code>
+  </div>
+  <!--  -->
+</div>
+{{end}}
+<div class="spacer"></div>
+{{end}}
+
+{{if .err}}
+<div class="alert alert-error">
+  {{.err}} <a class="close" data-dismiss="alert" href="#">&times;</a>
+</div>
+<div class="spacer"></div>
+{{end }}
+
+<div class="row">
+  <div class="span12">
+    <form action="{{url "App.Index"}}" class="form-inline" method="GET">
+      <fieldset>
+        <input type="text" class="span11" name="domain" placeholder="Enter domain here..." value="{{.domain}}">
+        <button type="submit" class="btn btn-info">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{{template "footer.html" .}}

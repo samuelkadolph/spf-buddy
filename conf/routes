@@ -1,0 +1,5 @@
+module:testrunner
+
+GET     /                                       App.Index
+GET     /favicon.ico                            404
+GET     /public/*filepath                       Static.Serve("public")

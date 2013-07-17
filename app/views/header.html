@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>SPF Buddy {{.title}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+      .spacer {
+        margin-top: 20px;
+      }
+    </style>
+    <link rel="shortcut icon" type="image/png" href="/public/images/favicon.png">
+    <script src="/public/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    {{range .moreStyles}}
+      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+    {{end}}
+    {{range .moreScripts}}
+      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+    {{end}}
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <h3 class="muted">SPF Buddy</h3>
+      </div>
+      <hr />
