@@ -31,8 +31,10 @@
   <div class="span12">
     <form action="{{url "App.Index"}}" class="form-inline" method="GET">
       <fieldset>
-        <input type="text" class="span11" name="domain" placeholder="Enter domain here..." value="{{.domain}}">
-        <button type="submit" class="btn btn-info">Submit</button>
+        <div class="input-append">
+          <input type="text" class="span11" name="domain" placeholder="Enter domain here..." value="{{.domain}}">
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
       </fieldset>
     </form>
   </div>
