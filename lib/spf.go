@@ -2,12 +2,13 @@ package lib
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"net"
 	"regexp"
 	"strings"
 )
+
+const blankSPF = "v=spf1 ~all"
 
 type SPF struct {
 	Entries []string
@@ -17,7 +18,16 @@ var spfRegexp = regexp.MustCompile("\\Av=spf1")
 
 func LookupSPF(domain string) (*SPF, error) {
 	txt, err := net.LookupTXT(domain)
-	if err != nil {
+
+	if _, ok := err.(*net.DNSError); ok {
+		_, err := net.LookupHost(domain)
+
+		if err != nil {
+			return nil, err
+		} else {
+			return ParseSPF(blankSPF)
+		}
+	} else if err != nil {
 		return nil, err
 	}
 
@@ -27,7 +37,7 @@ func LookupSPF(domain string) (*SPF, error) {
 		}
 	}
 
-	return nil, errors.New("No SPF record found")
+	return ParseSPF(blankSPF)
 }
 
 func ParseSPF(txt string) (*SPF, error) {
